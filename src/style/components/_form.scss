@@ -1,0 +1,19 @@
+.form-input-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @include sm-up {
+    width: 500px;
+  }
+
+  &__input {
+    flex: 1 1 auto;
+  }
+
+  &__button {
+    flex-shrink: 0;
+    margin-left: 15px;
+  }
+}

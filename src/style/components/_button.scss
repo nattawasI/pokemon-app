@@ -1,0 +1,115 @@
+/* button-tag
+---------------------------------------- */
+.button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  height: 40px;
+  padding: 5px 15px;
+  background: linear-gradient(45deg, rgba(82,223,167,1) 25%, rgba(27,195,159,0.9864320728291317) 65%);
+  border-radius: 4px;
+  font-size: $fs-base;
+  font-weight: bold;
+  color: $color-white;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color 0.2s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  &--outline {
+    background: transparent;
+    border: 2px solid $color-black;
+    color: $color-black;
+
+    &::before {
+      display: none;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &--outline-white {
+    background: transparent;
+    border: 2px solid $color-white;
+    color: $color-white;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &--disabled {
+    cursor: default;
+
+    &::before {
+      background-color: rgba(255, 255, 255, 0.5);
+      opacity: 1;
+    }
+  }
+
+  &:not(.button--disabled):hover {
+    &::before {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* button-pagination
+---------------------------------------- */
+.button-pagination {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: 2px solid $color-black;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &__icon {
+    font-size: $fs-md;
+    color: $color-black;
+  }
+
+  &--prev {
+    margin-right: 15px;
+  }
+
+  &--next {
+    margin-left: 15px;
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}

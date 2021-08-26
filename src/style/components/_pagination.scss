@@ -1,0 +1,17 @@
+.pagination {
+  display: flex;
+  align-items: cneter;
+
+  &__button > .button-pagination:not(:first-child) {
+    margin-left: 8px;
+  }
+
+  &__number {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    font-size: $fs-base;
+    color: $color-black;
+  }
+}

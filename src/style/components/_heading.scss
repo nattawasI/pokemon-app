@@ -1,0 +1,32 @@
+.heading {
+  display: inline-flex;
+  align-items: center;
+
+  > img {
+    margin-right: 10px;
+  }
+
+  &--xxxl {
+    font-size: $fs-xxxl;
+  }
+
+  &--xxl {
+    font-size: $fs-xxl;
+  }
+
+  &--xl {
+    font-size: $fs-xl;
+  }
+
+  &--lg {
+    font-size: $fs-lg;
+  }
+
+  &--md {
+    font-size: $fs-md;
+  }
+
+  &--base {
+    font-size: $fs-base;
+  }
+}

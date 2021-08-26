@@ -1,0 +1,17 @@
+.footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: $color-white;
+  border-top: 1px solid $color-gray-border;
+
+  @include md-up {
+    height: 70px;
+  }
+}

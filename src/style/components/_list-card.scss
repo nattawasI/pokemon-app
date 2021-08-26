@@ -1,0 +1,38 @@
+.list-card {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -25px -8px 0;
+
+    @include md-up {
+      margin: -40px -15px 0;
+    }
+  }
+
+  &__item {
+    width: 50%;
+    margin-top: 25px;
+    padding: 0 8px;
+
+    @include md-up {
+      width: 33.33%;
+      margin-top: 40px;
+      padding: 0 15px;
+    }
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__no-result {
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+  }
+}

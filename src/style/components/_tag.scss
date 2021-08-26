@@ -1,0 +1,43 @@
+.tag-type {
+  display: inline-flex;
+  align-items: center;
+  font-size: $fs-sm;
+  color: $color-black;
+  text-transform: capitalize;
+
+  &:before {
+    content: "";
+    position: relative;
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+
+  &--text-white {
+    color: $color-white;
+  }
+}
+
+.tag-type--all::before { display: none; }
+.tag-type--normal::before { background: $color-normal; }
+.tag-type--fighting::before { background: $color-fighting; }
+.tag-type--flying::before { background: $color-flying; }
+.tag-type--poison::before { background: $color-poison; }
+.tag-type--ground::before { background: $color-ground; }
+.tag-type--rock::before { background: $color-rock; }
+.tag-type--bug::before { background: $color-bug; }
+.tag-type--ghost::before { background: $color-ghost; }
+.tag-type--steel::before { background: $color-steel; }
+.tag-type--fire::before { background: $color-fire; }
+.tag-type--water::before { background: $color-water; }
+.tag-type--grass::before { background: $color-grass; }
+.tag-type--electric::before { background: $color-electric; }
+.tag-type--psychic::before { background: $color-psychic; }
+.tag-type--ice::before { background: $color-ice; }
+.tag-type--dragon::before { background: $color-dragon; }
+.tag-type--dark::before { background: $color-dark; }
+.tag-type--fairy::before { background: $color-fairy; }
+.tag-type--unknown::before { background: $color-unknown; }
+.tag-type--shadow::before { background: $color-shadow; }
