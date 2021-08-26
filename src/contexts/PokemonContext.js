@@ -39,31 +39,35 @@ const PokemonProvider = ({ children }) => {
     setCurrentPageContext(count)
   }
 
+  const getPokemonObject = (data) => {
+    const objectData = {
+      id: data.id,
+      name: data.name,
+      image: data.sprites.front_default,
+      types: data.types
+    }
+    return objectData
+  }
+
   const searchPokemonContext = async () => {
     const target = valueSearchContext.toLowerCase()
 
     /* using fetch
     ---------------------------------------- */
-      setIsLoadingContext(true)
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${ target }`)
-      if (response.ok) {
-        const data = await response.json()
-        const objectData = {
-          id: data.id,
-          name: data.name,
-          image: data.sprites.front_default,
-          types: data.types
-        }
-        setIsLoadingContext(false)
-        setFetchStatusContext(response.status.toString())
-        setFetchEventContext('search')
-        setPokemonListContext([objectData])
-      } else {
-        setIsLoadingContext(false)
-        setFetchStatusContext('404')
-        setFetchEventContext('search')
-        setPokemonListContext([])
-      }
+    setIsLoadingContext(true)
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${ target }`)
+    if (response.ok) {
+      const data = await response.json()
+      setIsLoadingContext(false)
+      setFetchStatusContext(response.status.toString())
+      setFetchEventContext('search')
+      setPokemonListContext([getPokemonObject(data)])
+    } else {
+      setIsLoadingContext(false)
+      setFetchStatusContext('404')
+      setFetchEventContext('search')
+      setPokemonListContext([])
+    }
 
     /* using axios
     ---------------------------------------- */
@@ -102,7 +106,7 @@ const PokemonProvider = ({ children }) => {
     setIsLoadingContext(true)
     setValueSearchContext('')
 
-    /* using fetch
+    /* using fetch async, await
     ---------------------------------------- */
     const response = await fetch(currentUrlContext)
     const data = await response.json()
@@ -110,13 +114,7 @@ const PokemonProvider = ({ children }) => {
     for (const item of data.results) {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${ item.name }`)
       const data = await response.json()
-      const objectData = {
-        id: data.id,
-        name: data.name,
-        image: data.sprites.front_default,
-        types: data.types
-      }
-      listAllPokemon.push(objectData)
+      listAllPokemon.push(getPokemonObject(data))
     }
     setPrevUrlContext(data.previous)
     setNextUrlContext(data.next)
