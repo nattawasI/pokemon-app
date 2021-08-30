@@ -39,25 +39,19 @@ const PokemonProvider = ({ children }) => {
     setCurrentPageContext(count)
   }
 
-  const getPokemonObject = (datas) => {
-    const objectArray = []
-    for (const data of datas) {
-      const objectData = {
-        id: data.id,
-        name: data.name,
-        image: data.sprites.front_default,
-        types: data.types
-      }
-      objectArray.push(objectData)
+  const getPokemonObject = (data) => {
+    const objectData = {
+      id: data.id,
+      name: data.name,
+      image: data.sprites.front_default,
+      types: data.types
     }
-    return objectArray
+    return objectData
   }
 
   const searchPokemonContext = async () => {
     const target = valueSearchContext.toLowerCase()
 
-    /* using fetch
-    ---------------------------------------- */
     setIsLoadingContext(true)
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${ target }`)
     if (response.ok) {
@@ -65,7 +59,7 @@ const PokemonProvider = ({ children }) => {
       setIsLoadingContext(false)
       setFetchStatusContext(response.status.toString())
       setFetchEventContext('search')
-      setPokemonListContext(getPokemonObject([data]))
+      setPokemonListContext([getPokemonObject(data)])
     } else {
       setIsLoadingContext(false)
       setFetchStatusContext('404')
@@ -85,26 +79,21 @@ const PokemonProvider = ({ children }) => {
   const getPokemonListContext = async () => {
     setIsLoadingContext(true)
     setValueSearchContext('')
+
     const response = await fetch(currentUrlContext)
-    if (response.ok) {
+    const data = await response.json()
+    const listAllPokemon = []
+    for (const item of data.results) {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${ item.name }`)
       const data = await response.json()
-      setPrevUrlContext(data.previous)
-      setNextUrlContext(data.next)
-      const promises = []
-
-      for (const item of data.results) {
-        promises.push(fetch(`https://pokeapi.co/api/v2/pokemon/${ item.name }`))
-      }
-
-      const responses = await Promise.all(promises)
-      const dataResponse = responses.map(response => response.json())
-      const results = await Promise.all(dataResponse)
-      const listAllPokemon = getPokemonObject(results)
-      setFetchStatusContext(response.status.toString())
-      setIsLoadingContext(false)
-      setFetchEventContext('fetchList')
-      setPokemonListContext(getPokemonList(listAllPokemon))
+      listAllPokemon.push(getPokemonObject(data))
     }
+    setPrevUrlContext(data.previous)
+    setNextUrlContext(data.next)
+    setFetchStatusContext(response.status.toString())
+    setIsLoadingContext(false)
+    setFetchEventContext('fetchList')
+    setPokemonListContext(getPokemonList(listAllPokemon))
   }
 
   const changeCurrentUrlContext = (target) => {
